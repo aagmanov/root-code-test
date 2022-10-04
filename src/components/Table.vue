@@ -20,25 +20,26 @@ const onDrop = (e: DragEvent, status: TaskStatus): void =>
 <template>
   <div class="h-full grid grid-cols-3 gap-x-6">
     <div
-      v-for="cell in table"
-      :key="cell.status"
-      @drop="onDrop($event, cell.status)"
+      v-for="(value, key) in table"
+      :key="key"
+      @drop="onDrop($event, key)"
       @dragover.prevent
       @dragenter.prevent
-      class="p-2 h-full space-y-2 border border-1 border-gray-400"
+      class="flex flex-col gap-y-2"
     >
-      <div 
-        v-for="task in cell.tasks"
-        :key="task.id"
-        draggable="true"
-        @dragstart="onDragstart($event, task)"
-        class="p-1 border border-1 border-gray-500"
-      >
-        <div class="text-center">
+      <div class="text-center">{{ key }}</div>
+      <ul class="p-2 h-full space-y-2 border border-1 border-gray-400">
+        <li 
+          v-for="task in value"
+          :key="task.id"
+          draggable="true"
+          @dragstart="onDragstart($event, task)"
+          class="p-1 border border-1 border-gray-500 duration-100 hover:bg-gray-800"
+        >
           {{ task.title }}<br>
           {{ task.description }}
-        </div>
-      </div>
+        </li>
+      </ul>
     </div>
   </div>
 </template>
