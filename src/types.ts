@@ -1,4 +1,4 @@
-type TaskStatus = 'inProgress' | 'review' | 'test'
+type TaskStatus = 'inProgress' | 'review' | 'testing'
 
 interface Task {
   id: number
@@ -12,16 +12,7 @@ interface Tasks {
 }
 
 interface Table {
-  inProgress: {
-    status: TaskStatus
-    tasks: Task[]
-  },
-  review: {
-    status: TaskStatus,
-    tasks: Task[]
-  },
-  'test': {
-    status: TaskStatus,
-    tasks: Task[]
-  }
+  inProgress: Task[],
+  review: Task[],
+  testing: Task[]
 }

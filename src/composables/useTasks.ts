@@ -1,7 +1,19 @@
-import type { Ref } from 'vue'
-import { ref } from 'vue'
+import type { Ref, ComputedRef } from 'vue'
+import { ref, computed } from 'vue'
 
 export const tasks: Ref<Task[]> = ref([])
+
+export const inProgress: ComputedRef<Task[]> = computed(() => 
+  tasks.value.filter(task => task.status === 'inProgress')
+)
+
+export const review: ComputedRef<Task[]> = computed(() => 
+  tasks.value.filter(task => task.status === 'review')
+)
+
+export const testing: ComputedRef<Task[]> = computed(() => 
+  tasks.value.filter(task => task.status === 'testing')
+)
 
 export const initTasks = (amount: number): void => {
   for (let i = 0; i < amount; i++) {
